@@ -48,4 +48,4 @@ HdotC = Ip*phiddot*k + cross(Rgc,Ag)*M...
 eqn = Mc - HdotC; eqn = simplify(eqn(3)); 
 phiddot = solve(eqn,phiddot);
 
-matlabFunction(phiddot,'file','TiltAngularAcceleration.m');
+matlabFunction(phiddot,'file','D:\NilayFilesDocs\IISc\MTech_Final_Project\BiSteerCycle\MATLAB\Segway2D\TiltAngularAcceleration.m');
