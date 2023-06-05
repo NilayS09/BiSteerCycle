@@ -11,7 +11,7 @@ function zdot = BiSteer3D_Dynamics(t,z,Ip,Iw,M,m,g,l,r,lF,lR)
     phi_des = 0.2*cos(t); phidot_des = 0;
 
     Kpr = -20; Kdr = -3;
-    Kpf = -1.5; Kdf = -0.5;
+    Kpf = -5; Kdf = -3;
 
     delF_dot = Kpf*(phi_des - phi) + Kdf*(phidot_des - phidot);
     delR_dot = 0;

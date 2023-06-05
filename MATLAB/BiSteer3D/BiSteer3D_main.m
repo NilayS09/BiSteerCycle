@@ -36,13 +36,13 @@ delF = 0; delF_dot = 0;
 Vf = 0; Vf_dot = 0;
 % Rear Wheel
 delR = 0; delR_dot = 0; 
-Vr = 3; Vr_dot = 0;
+Vr = 1; Vr_dot = 0;
 % Heading Angle
 psi = 0;
 % Pose
 x = 0; y = 0;
 % Tilt Angle
-phi = 0.2; 
+phi = 0.1; 
 phidot = 0;
 % System 
 M = 2; Ip = 2e-2; lF = 0.1; lR = 0.1; l = 0.1;
@@ -121,5 +121,5 @@ ylabel("$\psi$ (radians)",'Interpreter','latex')
 f2 = figure;
 tend = tspan(2);
 animspeed = 1;
-save = 1;
+save = 0;
 BiSteer3D_Animation(solution,lR,lF,l,tend,animspeed,save)
