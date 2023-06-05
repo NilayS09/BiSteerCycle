@@ -81,10 +81,10 @@ MC = cross(rF_C,Tf*f1) + cross(rR_C,Tr*r1);
 
 % Rate of change of angular momentum
 syms m real % mass of BiSteer cycle 
-syms I33 real % moment of inertia
+syms Ip real % moment of inertia
 
 rG_C = rR_C + lR*a1;
-HC_dot = cross(rG_C,m*aG_O) + I33*psi_ddot*k;
+HC_dot = cross(rG_C,m*aG_O) + Ip*psi_ddot*k;
 
 % Angular Momentum Balance
 eqn = MC - HC_dot; 
@@ -98,4 +98,5 @@ y_dot = Vr*sin(psi + delR);
 
 matlabFunction(x_dot,y_dot,psi_dot,Vr_dot,'File','D:\NilayFilesDocs\IISc\MTech_Final_Project\BiSteerCycle\MATLAB\BiSteer2D\BiSteer2D_PoseDerivatives.m');
 matlabFunction(rR_C,'File','D:\NilayFilesDocs\IISc\MTech_Final_Project\BiSteerCycle\MATLAB\BiSteer2D\BiSteer2D_RotationCentre.m');
-matlabFunction(aG_O,'File','D:\NilayFilesDocs\IISc\MTech_Final_Project\BiSteerCycle\MATLAB\BiSteer2D\BiSteer2D_COM_Acceleration.m');
+Ac = dot(aG_O,a2);
+matlabFunction(Ac,'File','D:\NilayFilesDocs\IISc\MTech_Final_Project\BiSteerCycle\MATLAB\BiSteer2D\BiSteer2D_COM_Acceleration.m');

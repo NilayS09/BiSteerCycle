@@ -19,7 +19,7 @@ m = 1; I33 = 0.1;
 
 % States
 x0 = 1; y0 = 0; psi0 = pi/2;
-Vr0 = 1; delF0 = pi/4; delR0 = pi/3;
+Vr0 = 3; delF0 = pi/3; delR0 = pi/4;
 
 z0 = [x0;y0;psi0;Vr0;delF0;delR0];
 
