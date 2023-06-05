@@ -1,4 +1,4 @@
-function BiSteer2D_Animation(lR,lF,xR,yR,xG,yG,xF,yF,solution,animspeed,tend,save)
+function BiSteer2D_Animation(lR,lF,xR,yR,xG,yG,xF,yF,psi0,delR0,delF0,solution,animspeed,tend,save)
     % Defining system graphics
     % system variable
     L = lR + lF; r = 0.25;
@@ -52,7 +52,7 @@ function BiSteer2D_Animation(lR,lF,xR,yR,xG,yG,xF,yF,solution,animspeed,tend,sav
     yf2 = tan(pi/2 + psi0 + delF0)*(xf2 - xF0) + yF0;
     f2_plot = plot(xf2,yf2,'Color',[0,0,0,0.1],LineWidth=0.1,LineStyle='-.');
     
-    rR_C = RotationCentre(delF0,delR0,lF,lR,psi0);
+    rR_C = BiSteer2D_RotationCentre(delF0,delR0,lF,lR,psi0);
     xC = xR0 - rR_C(1); yC = yR0 - rR_C(2);
     C = scatter(xC,yC,20,"blue","filled");
     
@@ -88,7 +88,7 @@ function BiSteer2D_Animation(lR,lF,xR,yR,xG,yG,xF,yF,solution,animspeed,tend,sav
         yr2 = tan(pi/2 + psi + delR)*(xr2 - xR) + yR;
         yf2 = tan(pi/2 + psi + delF)*(xf2 - xF) + yF;
         
-        rR_C = RotationCentre(delF,delR,lF,lR,psi);
+        rR_C = BiSteer2D_RotationCentre(delF,delR,lF,lR,psi);
         xC = xR - rR_C(1); yC = yR - rR_C(2);
     
         % Reflecting new positions in graph
@@ -107,7 +107,7 @@ function BiSteer2D_Animation(lR,lF,xR,yR,xG,yG,xF,yF,solution,animspeed,tend,sav
     end
     hold off
     if save
-        filename = 'BiSteer2D.avi';
+        filename = 'D:\NilayFilesDocs\IISc\MTech_Final_Project\BiSteerCycle\Videos\BiSteer2D.avi';
         writerObj = VideoWriter(filename);
         writerObj.FrameRate = 10;
         % set the seconds per image

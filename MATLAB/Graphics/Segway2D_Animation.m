@@ -48,7 +48,7 @@ while t < tend
 end
 hold off
 if save
-    filename = 'Segway.avi';
+    filename = 'D:\NilayFilesDocs\IISc\MTech_Final_Project\BiSteerCycle\Videos\Segway.avi';
     writerObj = VideoWriter(filename);
     writerObj.FrameRate = 10;
     % set the seconds per image

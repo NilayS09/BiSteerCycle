@@ -1,4 +1,4 @@
-function BiSteer3D_Animation(solution,lR,lF,lp,tend,animspeed)
+function BiSteer3D_Animation(solution,lR,lF,lp,tend,animspeed,save)
     
     % Wheel parameter
     r = 0.06; % wheel radius
@@ -82,14 +82,16 @@ function BiSteer3D_Animation(solution,lR,lF,lp,tend,animspeed)
     tic
     t = toc*animspeed;
     dt = 0.1;
+    i = 1;
     while(t<tend)
         Z = deval(solution,t);
 
         % Unpacking parameters
         tilt = Z(1);
-        Vf = Z(3); delF = Z(4);
-        Vr = Z(5); delR = Z(6);
-        x = Z(7); y = Z(8); psi = Z(9);
+        delF = Z(3); delR = Z(4);
+        x = Z(5); y = Z(6);
+        psi = Z(7); Vr = Z(8);
+        Vf = Vr.*(cos(delR)./cos(delF));
 
         Tvec = [x,y,0];
         % Pendulum Update
@@ -140,8 +142,27 @@ function BiSteer3D_Animation(solution,lR,lF,lp,tend,animspeed)
         % view(90+psi_deg,0)
         view(0,90)
         drawnow
+        F(i) = getframe(gcf);
         t = toc*animspeed;
-        % a.XLim = [x-1 x+1];
-        % a.YLim = [y-1 y+1];
+        a.XLim = [x-1 x+1];
+        a.YLim = [y-1 y+1];
+        i = i+1;
+    end
+    hold off
+    if save
+        filename = 'D:\NilayFilesDocs\IISc\MTech_Final_Project\BiSteerCycle\Videos\BiSteer3D.avi';
+        writerObj = VideoWriter(filename);
+        writerObj.FrameRate = 10;
+        % set the seconds per image
+        % open the video writer
+        open(writerObj);
+        % write the frames to the video
+        for i=1:length(F)
+            % convert the image to a frame
+            frame = F(i) ;    
+            writeVideo(writerObj, frame);
+        end
+        % close the writer object
+        close(writerObj);
     end
 end
