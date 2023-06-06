@@ -2,8 +2,8 @@ function z_dot= BiSteer2D_Dynamics(t,z,Ip,lF,lR,m)
 
     z_dot = zeros(9,1);
     Tf = 0; Tr = 0;
-    % delF_dot = -(pi/3)*cos(t); 
-    % delR_dot = -(pi/4)*cos(t);
+    % delF_dot = 0;%-(pi/3)*cos(t); 
+    % delR_dot = 0;%-(pi/4)*cos(t);
     x = z(1); y = z(2);
     psi = z(3); Vr = z(4);
     delF = z(5); delR = z(6);
@@ -20,6 +20,7 @@ function z_dot= BiSteer2D_Dynamics(t,z,Ip,lF,lR,m)
     % else
     %     psides = atan2(ydes,xdes) + 2*pi + pi/2;
     % end
+    
     pose_des = [xdes,ydes,psides];
     pose = [x,y,psi];
     pose_der = [x_dot,y_dot,psi_dot];

@@ -93,11 +93,11 @@ Vr_dot = solve(eqn(3),Vr_dot);
 Vr_dot = simplify(Vr_dot);
 
 
-x_dot = Vr*cos(psi + delR);
-y_dot = Vr*sin(psi + delR);
+x_dot = Vr*cos(psi + delR) + dot(lR*psi_dot*a2,i);
+y_dot = Vr*sin(psi + delR) + dot(lR*psi_dot*a2,j);
 
-vars = [Vr,psi,delR];
-vars_dot = [Vr_dot,psi_dot,delR_dot]';
+vars = [Vr,psi,delR,delF];
+vars_dot = [Vr_dot,psi_dot,delR_dot,delF_dot]';
 
 J = jacobian(x_dot,vars);
 x_ddot = simplify(J*vars_dot);

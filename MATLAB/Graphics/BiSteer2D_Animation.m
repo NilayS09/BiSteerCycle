@@ -68,12 +68,12 @@ function BiSteer2D_Animation(lR,lF,xR,yR,xG,yG,xF,yF,psi0,delR0,delF0,solution,a
         Z = deval(solution,t);
     
         % unpacking parameters
-        xR = Z(1); yR = Z(2); psi = Z(3);
+        xG = Z(1); yG = Z(2); psi = Z(3);
         Vr = Z(4); delF = Z(5); delR = Z(6);
-        xG = xR + lR*cos(psi);
-        yG = yR + lR*sin(psi);
-        xF = xR + (lR+lF)*cos(psi);
-        yF = yR + (lR+lF)*sin(psi);
+        xR = xG - lR*cos(psi);
+        yR = yG - lR*sin(psi);
+        xF = xG + lF*cos(psi);
+        yF = yG + lF*sin(psi);
     
         % Calculating new position of system elements
         axle = rotate(axle0,psi);

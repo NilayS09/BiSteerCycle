@@ -34,17 +34,17 @@ options = odeset('AbsTol', small, 'RelTol', small);
 solution = ode45(f, tspan, z0, options);
 toutput = linspace(solution.x(1),solution.x(end),5000);
 Z = deval(solution,toutput);
-xR = Z(1,:); yR = Z(2,:); psi = Z(3,:);
+xG = Z(1,:); yG = Z(2,:); psi = Z(3,:);
 Vr = Z(4,:); delF = Z(5,:); delR = Z(6,:);
 xdot = Z(7,:); ydot = Z(8,:); psidot = Z(9,:);
 
 %% Plots
 f1 = figure;
 subplot(3,3,1)
-plot(toutput,xR)
+plot(toutput,xG)
 title("xR")
 subplot(3,3,2)
-plot(toutput,yR)
+plot(toutput,yG)
 title("yR")
 subplot(3,3,3)
 plot(toutput,psi)
@@ -71,8 +71,8 @@ subplot(3,3,9)
 plot(toutput,psidot) 
 title("psidot")
 f2 = figure;
-xF = xR + (lR+lF)*cos(psi);
-yF = yR + (lR+lF)*sin(psi);
+xF = xG + lF*cos(psi);
+yF = yG + lF*sin(psi);
 plot(xF,yF) 
 title("xF vs yF")
 axis equal
@@ -81,16 +81,16 @@ xdes = 1.4142*cos(toutput);
 ydes = 1.4142*sin(toutput);
 plot(ydes,xdes)
 hold on
-plot(xR,yR) 
+plot(xG,yG) 
 hold off
-title("xR vs yR")
+title("xG vs yG")
 axis equal
 
 f4 = figure;
-xG = xR + lR*cos(psi);
-yG = yR + lR*sin(psi);
-plot(xG,yG)
-title("xG vs yG")
+xR = xG - lR*cos(psi);
+yR = yG - lR*sin(psi);
+plot(xR,yR)
+title("xR vs yR")
 axis equal
 
 %% Animation
