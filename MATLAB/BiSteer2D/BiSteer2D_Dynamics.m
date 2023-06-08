@@ -1,7 +1,7 @@
 function z_dot= BiSteer2D_Dynamics(t,z,Ip,lF,lR,m)
 
     z_dot = zeros(9,1);
-    Tf = 0; Tr = 0;
+    Tf = 0;
     % delF_dot = 0;%-(pi/3)*cos(t); 
     % delR_dot = 0;%-(pi/4)*cos(t);
     x = z(1); y = z(2);
@@ -10,10 +10,10 @@ function z_dot= BiSteer2D_Dynamics(t,z,Ip,lF,lR,m)
     x_dot = z(7); y_dot = z(8);
     psi_dot = z(9);
 
-    xdes = 1.4142*cos(t);
-    ydes = 1.4142*sin(t);
+    xdes = 2*cos(0.5*t);
+    ydes = 2*sin(0.5*t);
 
-    psides = t + pi/2;
+    psides = 0.5*t + pi/2;
 
     % if ydes >= 0
     %     psides = atan2(ydes,xdes) + pi/2;
@@ -24,8 +24,8 @@ function z_dot= BiSteer2D_Dynamics(t,z,Ip,lF,lR,m)
     pose_des = [xdes,ydes,psides];
     pose = [x,y,psi];
     pose_der = [x_dot,y_dot,psi_dot];
-    gains.x = struct('Kp',25,'Kd',5,'Ki',0);
-    gains.y = struct('Kp',25,'Kd',5,'Ki',0);
+    gains.x = struct('Kp',16,'Kd',11,'Ki',0);
+    gains.y = struct('Kp',16,'Kd',11,'Ki',0);
     gains.psi = struct('Kp',5,'Kd',2,'Ki',0);
     [delF_dot, delR_dot, Tr] = BiSteer2D_TrajectoryController(pose_des,pose,...
                            pose_der,gains,delF,delR);

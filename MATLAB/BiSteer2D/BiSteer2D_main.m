@@ -14,11 +14,11 @@ clc; clear; close all;
 %% Initializations
 
 % System Parameters
-lR = 1; lF = 1;
-m = 1; Ip = 0.1;
+lR = 0.1; lF = 0.1;
+m = 2.5; Ip = 2e-2;
 
 % States
-x0 = 1.4142; y0 = 0; psi0 = pi/2;
+x0 = 3; y0 = 0; psi0 = pi/2;
 Vr0 = 0; delF0 = 0; delR0 = 0;
 x_dot0 = 0; y_dot0 = 0; psi_dot0 = 0;
 
@@ -26,7 +26,7 @@ z0 = [x0;y0;psi0;Vr0;delF0;delR0;x_dot0;y_dot0;psi_dot0];
 
 %% Dynamics
 
-tend = 50;
+tend = 20;
 tspan = [0 tend];
 f = @(t,z) BiSteer2D_Dynamics(t,z,Ip,lF,lR,m);
 small = 1e-9;
@@ -77,8 +77,8 @@ plot(xF,yF)
 title("xF vs yF")
 axis equal
 f3 = figure;
-xdes = 1.4142*cos(toutput);
-ydes = 1.4142*sin(toutput);
+xdes = 2*cos(0.5*toutput);
+ydes = 2*sin(0.5*toutput);
 plot(ydes,xdes)
 hold on
 plot(xG,yG) 
@@ -93,10 +93,17 @@ plot(xR,yR)
 title("xR vs yR")
 axis equal
 
+f6 = figure;
+% xdes = 10; ydes = 0;
+plot(toutput,xdes-xG,toutput,ydes-yG) 
+title("x and y error")
+legend("x","y")
+axis equal
+
 %% Animation
 
 f5 = figure("Name","BiSteer2D Animation");
 animspeed = 1;
 tend = tspan(2);
 save = 0;
-BiSteer2D_Animation(lR,lF,xR,yR,xG,yG,xF,yF,psi0,delR0,delF0,solution,animspeed,tend,save)
+BiSteer2D_Animation(lR,lF,xG,yG,psi0,delR0,delF0,solution,animspeed,tend,save)
