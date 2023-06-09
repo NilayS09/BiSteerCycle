@@ -8,13 +8,14 @@ function zdot = BiSteer3D_Dynamics(t,z,Ip,Iw,M,m,g,l,r,lF,lR)
     zdot = zeros(8,1);
     zdot(1) = phidot;
 
-    phi_des = 0.2*cos(t); phidot_des = 0;
+    phi_des = 0.1*sin(t);
 
-    Kpr = -20; Kdr = -3;
+    KpTr = -20; KdTr = -3;
     Kpf = -5; Kdf = -3;
+    Kpr = 1.5; Kdr = 1;
 
-    delF_dot = Kpf*(phi_des - phi) + Kdf*(phidot_des - phidot);
-    delR_dot = 0;
+    delF_dot = Kpf*(phi_des - phi) + Kdf*(-phidot);
+    delR_dot = 0;%Kpr*(phi_des - phi) + Kdr*(-phidot);
     
     % if(delF == pi/2)    
     %     Vf_dot = Kpf*(phi_des - phi) + Kdf*(phidot_des - phidot);
@@ -27,8 +28,8 @@ function zdot = BiSteer3D_Dynamics(t,z,Ip,Iw,M,m,g,l,r,lF,lR)
     %     Vr_dot = Kpr*(phi_des - phi) + Kdr*(phidot_des - phidot);
     %     Vf_dot = FrontWheelConstraint(Vr,Vr_dot,delF,delR,delF_dot,delR_dot);
     % end
-    Tf = 0;%Kpf*(phi_des - phi) + Kdf*(phidot_des - phidot);
-    Tr = 0;%Kpr*(phi_des - phi) + Kdr*(phidot_des - phidot);
+    Tf = 0;%-(KpTr*(phi_des - phi) + KdTr*(-phidot));
+    Tr = 0;%KpTr*(phi_des - phi) + KdTr*(-phidot);
     [x_dot,y_dot,psi_dot,Vr_dot] = BiSteer2D_PoseDerivatives(Ip,Tf,Tr,...
                                    Vr,delF,delR,delF_dot,delR_dot,lF,lR,m,psi);
     Ac = BiSteer2D_COM_Acceleration(Vr,Vr_dot,delF,delR,delF_dot,delR_dot,lF,lR,psi);

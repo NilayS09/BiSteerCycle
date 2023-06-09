@@ -32,10 +32,10 @@ clc; clear; close all
 %% Variable Initializations
 
 % Front Wheel
-delF = 0; delF_dot = 0;
+delF = pi/15; delF_dot = 0;
 Vf = 0; Vf_dot = 0;
 % Rear Wheel
-delR = 0; delR_dot = 0; 
+delR = pi/15; delR_dot = 0; 
 Vr = 1; Vr_dot = 0;
 % Heading Angle
 psi = 0;
